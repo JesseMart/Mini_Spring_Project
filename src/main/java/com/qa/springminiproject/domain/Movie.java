@@ -17,7 +17,15 @@ public class Movie {
 	private int yearRelease;
 	
 	public Movie () {}
+	public Movie( String title, String genre, int yearRelease) {
+		super();
+		this.title = title;
+		this.genre = genre;
+		this.yearRelease = yearRelease;
+	}
 
+	
+	// Test Contructor ID
 	public Movie(Long id, String title, String genre, int yearRelease) {
 		super();
 		this.id = id;
@@ -25,6 +33,9 @@ public class Movie {
 		this.genre = genre;
 		this.yearRelease = yearRelease;
 	}
+	
+	
+	
 
 	public Long getId() {
 		return id;
@@ -57,6 +68,7 @@ public class Movie {
 	public void setYearRelease(int yearRelease) {
 		this.yearRelease = yearRelease;
 	}
+
 	
 	
 	
