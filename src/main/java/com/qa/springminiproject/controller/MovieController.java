@@ -66,5 +66,10 @@ public class MovieController {
 		return this.service.removeMovie(index) ? new ResponseEntity<>(HttpStatus.NO_CONTENT) :
 			new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	//=========================== custom Query ===========================
+	@GetMapping("/getGenre/{genre}")
+	public ResponseEntity<List<Movie>> getGenre(@PathVariable String genre) {
+		return new ResponseEntity<List<Movie>>(this.service.getByGenre(genre), HttpStatus.OK);
+	}
 	
 }

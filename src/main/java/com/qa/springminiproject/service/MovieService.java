@@ -47,5 +47,8 @@ public class MovieService {
 		this.repo.deleteById(id);
 		return this.repo.existsById(id);
 	}
-	
+	// ========================================== Custom Query ======================================
+	public List<Movie> getByGenre(String genre) {
+		return this.repo.findbyGenre(genre);
+	}
  }
