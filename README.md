@@ -1,8 +1,12 @@
 # Mini_Spring_Project
 
-## This Project is an OOP based web application(NO FRONT END)
+## This Project is an OOP based web application
 ## Languages & Technologies Used
 * Java (BackEnd)
+* JavaScript
+* HTML5
+* CSS3
+* Axios
 * Git
 * JUnit 
 * Spring Boot
