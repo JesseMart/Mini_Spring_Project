@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,22 +27,13 @@ import com.qa.springminiproject.service.MovieService;
 
 //Allows the use of RequestMapping to expose methods and provides
 //configuration for handling request in a RESTful manner (returning data in JSON format)
+@CrossOrigin
 @RestController 
 @RequestMapping("/movie")  // <-- Exposes methods to request at a defined URL
 public class MovieController {
 
 	private MovieService service;
 	
-	@SuppressWarnings("deprecation")
-	@Configuration
-	@EnableWebMvc
-	public class WebConfig extends WebMvcConfigurerAdapter {
-
-	    @Override
-	    public void addCorsMappings(CorsRegistry registry) {
-	        registry.addMapping("/**");
-	    }
-	}
 	
 	@Autowired
 	public MovieController(MovieService service) {
@@ -64,6 +56,7 @@ public class MovieController {
 		return ResponseEntity.ok(this.service.getOneMovie(index));
 	}
 	//============================ UPDATE =================================
+	
 	@PutMapping("/update/{index}") // <-- PutMapping used to replace data in its entirety
 	public ResponseEntity<Movie> updateMovie(@PathVariable Long index, @RequestBody Movie newMovie) {
 		this.service.updateMovie(index, newMovie);

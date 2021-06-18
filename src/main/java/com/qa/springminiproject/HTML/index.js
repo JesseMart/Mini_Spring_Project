@@ -189,8 +189,8 @@ const createEntry = (movieObj) => {
   yearTD.innerHTML = `${movieObj.yearRelease}`;
 
   const functionalityTD = document.createElement('td');
-  const editLink = document.createElement('a');
-  const deleteLink = document.createElement('a');
+  const editLink = document.createElement('button');
+  const deleteLink = document.createElement('button');
 
   
 
@@ -198,15 +198,21 @@ const createEntry = (movieObj) => {
   functionalityTD.appendChild(deleteLink);
   editLink.innerHTML = ' EDIT ';
   editLink.className = 'edit';
-  editLink.href = '#';
-  editLink.title = 'Edit';
   deleteLink.innerHTML = ' DELETE ';
   deleteLink.className = 'delete';
-  deleteLink.href = '#';
-  deleteLink.title = 'Delete';
-  
 
+  editLink.addEventListener('click', () => {
+    const titleInput = document.querySelector('#edit-movie-title');
+    const genreInput = document.querySelector('#edit-movie-genre');
+    const yearInput = document.querySelector('#edit-movie-year');
 
+    titleInput.name = movieObj.id;
+    titleInput.value = movieObj.title;
+    genreInput.value = movieObj.genre;
+    yearInput.value = movieObj.yearRelease;
+
+    document.querySelector('.edit-modal').classList.remove('hide');
+  });
 
   tableRow.appendChild(checkboxTD);
   tableRow.appendChild(titleTD);
@@ -225,7 +231,7 @@ const toggleModal = (targetElement) => {
   }
 };
 
-const addMovie = () => {
+const addMovie = async () => {
   const title = document.querySelector('#add-movie-title');
   const genre = document.querySelector('#add-movie-genre');
   const year = document.querySelector('#add-movie-year');
@@ -236,7 +242,7 @@ const addMovie = () => {
     yearRelease: parseInt(year.value, 10),
   };
 
-  createMovie(movieData);
+  await createMovie(movieData);
   toggleModal(document.querySelector('.add-modal'));
 
   title.value = null;
@@ -245,6 +251,7 @@ const addMovie = () => {
 };
 
 window.addEventListener('load', async () => {
+  //
   const movieList = await Promise.resolve(getAllMovies());
 
   for (let m of movieList.movies) {
@@ -255,13 +262,43 @@ window.addEventListener('load', async () => {
 const addMovieForm = document.querySelector('.add-modal');
 addMovieForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  addMovie();
+  await addMovie();
 
+  document.querySelector('.table-body').innerHTML = null;
   const movieList = await Promise.resolve(getAllMovies());
 
   for (let m of movieList.movies) {
     createEntry(m);
   }
+});
+
+const editMovieForm = document.querySelector('.edit-modal');
+editMovieForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const titleInput = document.querySelector('#edit-movie-title');
+  const genreInput = document.querySelector('#edit-movie-genre');
+  const yearInput = document.querySelector('#edit-movie-year');
+
+  const movieID = parseInt(titleInput.name, 10);
+
+  const movieData = {
+    id: movieID,
+    title: titleInput.value,
+    genre: genreInput.value,
+    yearRelease: yearInput.value,
+  };
+
+  await updateMovie(movieData);
+
+  document.querySelector('.table-body').innerHTML = null;
+  const movieList = await Promise.resolve(getAllMovies());
+
+  for (let m of movieList.movies) {
+    createEntry(m);
+  }
+
+  toggleModal(document.querySelector('.edit-modal'));
 });
 
 const addBtn = document.querySelector('.add-btn');
