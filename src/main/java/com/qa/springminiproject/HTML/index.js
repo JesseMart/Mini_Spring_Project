@@ -14,6 +14,7 @@ const getGenre = async (genre) => {
     .get(`${URL}/getGenre/${genre}`)
     .then((res) => {
       movies = res.data;
+      
     })
     .catch((err) => {
       error = err;
@@ -31,6 +32,14 @@ const getAllMovies = async () => {
     .get(`${URL}/getAllMovies`)
     .then((res) => {
       movies = res.data;
+      console.log(movies)
+      const movieArr = movies.map(film => {
+        return `<tr><td><span><input type="checkbox" name="option[]" id="checkbox1" value="1"/> <label for="checkbox1"></label></span></td>
+            <td>${film.title}</td> <td> ${film.genre} </td> <td> ${film.yearRelease} </td></tr>`
+      }).join('')
+
+      console.log(movieArr);
+      document.querySelector(".movie-titles").insertAdjacentHTML('afterbegin', movieArr)
     })
     .catch((err) => {
       error = err;
