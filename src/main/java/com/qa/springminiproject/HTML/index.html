@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <title>Spring Boot Front End</title>
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
     <div class="container">
@@ -21,9 +22,8 @@
               <h2>Manage <b>Movies</b></h2>
             </div>
             <div class="col-sm6">
-              <a href="" class="btn btn-success" data-toggle="modal">
-                ADD NEW MOVIE</a
-              >
+              <button class="add-btn btn btn-success" data-toggle="modal">
+                ADD NEW MOVIE</button>
               <a href="" class="btn btn-danger" data-toggle="modal">
                 DELETE MOVIE</a
               >
@@ -45,119 +45,20 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>
-                <span>
-                  <input
-                    type="checkbox"
-                    id="checkbox1"
-                    name="option[]"
-                    value="1"
-                  />
-                  <label for="cehckbox1"></label>
-                </span>
-              </td>
-              <td>Jhon wick</td>
-              <td>action</td>
-              <td>2004</td>
-              <td>
-                <a
-                  href=""
-                  class="edit"
-                  data-toggle="modal"
-                  data-toggle="tooltip"
-                  title="Edit"
-                >
-                  EDIT
-                </a>
-                <a
-                  href=""
-                  class="delete"
-                  data-toggle="modal"
-                  data-toggle="tooltip"
-                  title="Delete"
-                >
-                  DELETE
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>
-                  <input
-                    type="checkbox"
-                    id="checkbox1"
-                    name="option[]"
-                    value="1"
-                  />
-                  <label for="cehckbox1"></label>
-                </span>
-              </td>
-              <td>Jhon wick</td>
-              <td>action</td>
-              <td>2004</td>
-              <td>
-                <a
-                  href=""
-                  class="edit"
-                  data-toggle="modal"
-                  data-toggle="tooltip"
-                  title="Edit"
-                >
-                  EDIT
-                </a>
-                <a
-                  href=""
-                  class="delete"
-                  data-toggle="modal"
-                  data-toggle="tooltip"
-                  title="Delete"
-                >
-                  DELETE
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span>
-                  <input
-                    type="checkbox"
-                    id="checkbox1"
-                    name="option[]"
-                    value="1"
-                  />
-                  <label for="cehckbox1"></label>
-                </span>
-              </td>
-              <td>Jhon wick</td>
-              <td>action</td>
-              <td>2004</td>
-              <td>
-                <a
-                  href=""
-                  class="edit"
-                  data-toggle="modal"
-                  data-toggle="tooltip"
-                  title="Edit"
-                >
-                  EDIT
-                </a>
-                <a
-                  href=""
-                  class="delete"
-                  data-toggle="modal"
-                  data-toggle="tooltip"
-                  title="Delete"
-                >
-                  DELETE
-                </a>
-              </td>
-            </tr>
+          <tbody class="table-body">
+            
           </tbody>
         </table>
       </div>
     </div>
+
+    <form class="add-modal hide">
+        <input id="add-movie-title" type="text" placeholder="title" required>
+        <input id="add-movie-genre" type="text" placeholder="genre" required>
+        <input id="add-movie-year" type="text" placeholder="year" required>
+
+        <button type='submit'>Add Movie</button>
+    </form>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
