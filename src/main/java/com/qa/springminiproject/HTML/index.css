@@ -1,3 +1,66 @@
 .hide {
   display: none;
 }
+
+body {
+  color: #566787;
+  background: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+.table-wrapper {
+  background: #fff;
+  padding: 20px 25px;
+  margin: 30px 0;
+  border-radius: 1px;
+  box-shadow: 0 1px 1px rgba(0,0, 0.247);
+}
+.table-title{
+  padding-bottom: 15px;
+  background: linear-gradient(40deg, #ff2020, #ff7e05) !important ;
+  color: rgb(0, 0, 0);
+  padding: 16px 30px;
+  font-weight: bold;
+  margin: -20px -25px 10px;
+  border-radius: 1px 1px 0 0;
+  box-shadow: 0 1px 1px rgba(0,0, 0.247);
+}
+.table-title h2 {
+  font-size: 25px;
+  
+}
+.table-title .btn {
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  min-width: 50px;
+  border-radius: 1px;
+  outline: none;
+  margin-left: 10px;
+  box-shadow: 0 1px 1px rgba(0,0, 0.247);
+}
+.table-title .btn span{
+  float:left;
+  margin-top: 2px;
+}
+table.table tr th, table.table tr td {
+  border-color: #e9e9e9;
+  padding: 12px 15px;
+  vertical-align: middle;
+}
+table.table tr th:last-child {
+  width: 60px;
+}
+table.table tr th:last-child {
+  width: 100px;
+}
+
+form {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid red;
+  border-radius: 4px;
+  font-weight: bold;
+}
