@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <title>Spring Boot Front End</title>
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
     <div class="container">
@@ -24,6 +25,8 @@
               <a href="#" onclick="getAllMovies();" class="btn btn-success" data-toggle="modal">
                 DISPLAY ALL MOVIES</a
               >
+              <button class="add-btn btn btn-success" data-toggle="modal">
+                ADD NEW MOVIE</button>
               <a href="" class="btn btn-danger" data-toggle="modal">
                 DELETE MOVIE</a
               >
@@ -45,7 +48,7 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody class="movie-titles">
+          <!-- <tbody class="movie-titles"> -->
             <!-- <tr >
               <td>
                 <span>
@@ -154,10 +157,20 @@
                 </a>
               </td>
             </tr> -->
+          <tbody class="table-body">
+            
           </tbody>
         </table>
       </div>
     </div>
+
+    <form class="add-modal hide">
+        <input id="add-movie-title" type="text" placeholder="title" required>
+        <input id="add-movie-genre" type="text" placeholder="genre" required>
+        <input id="add-movie-year" type="text" placeholder="year" required>
+
+        <button type='submit'>Add Movie</button>
+    </form>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

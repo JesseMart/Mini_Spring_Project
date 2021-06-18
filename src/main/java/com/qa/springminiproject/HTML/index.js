@@ -32,14 +32,14 @@ const getAllMovies = async () => {
     .get(`${URL}/getAllMovies`)
     .then((res) => {
       movies = res.data;
-      console.log(movies)
-      const movieArr = movies.map(film => {
-        return `<tr><td><span><input type="checkbox" name="option[]" id="checkbox1" value="1"/> <label for="checkbox1"></label></span></td>
-            <td>${film.title}</td> <td> ${film.genre} </td> <td> ${film.yearRelease} </td></tr>`
-      }).join('')
+    //   console.log(movies)
+    //   const movieArr = movies.map(film => {
+    //     return `<tr><td><span><input type="checkbox" name="option[]" id="checkbox1" value="1"/> <label for="checkbox1"></label></span></td>
+    //         <td>${film.title}</td> <td> ${film.genre} </td> <td> ${film.yearRelease} </td></tr>`
+    //   }).join('')
 
-      console.log(movieArr);
-      document.querySelector(".movie-titles").insertAdjacentHTML('afterbegin', movieArr)
+    //   console.log(movieArr);
+    //   document.querySelector(".movie-titles").insertAdjacentHTML('afterbegin', movieArr)
     })
     .catch((err) => {
       error = err;
@@ -160,3 +160,113 @@ const deleteMovie = async (movieID) => {
 
   return { error };
 };
+
+// DOM
+const createEntry = (movieObj) => {
+  const tableRow = document.createElement('tr');
+  const checkboxTD = document.createElement('td');
+  const checkboxContainer = document.createElement('span');
+  const checkboxInput = document.createElement('input');
+
+  checkboxInput.className = 'checkbox-input';
+  checkboxInput.type = 'checkbox';
+  checkboxInput.name = 'option[]';
+  checkboxInput.value = '1';
+
+  checkboxContainer.appendChild(checkboxInput);
+  checkboxTD.appendChild(checkboxContainer);
+
+  const titleTD = document.createElement('td');
+  titleTD.className = `title-${movieObj.id}`;
+  titleTD.innerHTML = `${movieObj.title}`;
+
+  const genreTD = document.createElement('td');
+  genreTD.className = `genre-${movieObj.id}`;
+  genreTD.innerHTML = `${movieObj.genre}`;
+
+  const yearTD = document.createElement('td');
+  yearTD.className = `year-${movieObj.id}`;
+  yearTD.innerHTML = `${movieObj.yearRelease}`;
+
+  const functionalityTD = document.createElement('td');
+  const editLink = document.createElement('a');
+  const deleteLink = document.createElement('a');
+
+  
+
+  functionalityTD.appendChild(editLink);
+  functionalityTD.appendChild(deleteLink);
+  editLink.innerHTML = ' EDIT ';
+  editLink.className = 'edit';
+  editLink.href = '#';
+  editLink.title = 'Edit';
+  deleteLink.innerHTML = ' DELETE ';
+  deleteLink.className = 'delete';
+  deleteLink.href = '#';
+  deleteLink.title = 'Delete';
+  
+
+
+
+  tableRow.appendChild(checkboxTD);
+  tableRow.appendChild(titleTD);
+  tableRow.appendChild(genreTD);
+  tableRow.appendChild(yearTD);
+  tableRow.appendChild(functionalityTD);
+
+  document.querySelector('.table-body').appendChild(tableRow);
+};
+
+const toggleModal = (targetElement) => {
+  if (Array.from(targetElement.classList).indexOf('hide') === 1) {
+    targetElement.classList.remove('hide');
+  } else {
+    targetElement.classList.add('hide');
+  }
+};
+
+const addMovie = () => {
+  const title = document.querySelector('#add-movie-title');
+  const genre = document.querySelector('#add-movie-genre');
+  const year = document.querySelector('#add-movie-year');
+
+  const movieData = {
+    title: title.value,
+    genre: genre.value,
+    yearRelease: parseInt(year.value, 10),
+  };
+
+  createMovie(movieData);
+  toggleModal(document.querySelector('.add-modal'));
+
+  title.value = null;
+  genre.value = null;
+  year.value = null;
+};
+
+window.addEventListener('load', async () => {
+  const movieList = await Promise.resolve(getAllMovies());
+
+  for (let m of movieList.movies) {
+    createEntry(m);
+  }
+});
+
+const addMovieForm = document.querySelector('.add-modal');
+addMovieForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  addMovie();
+
+  const movieList = await Promise.resolve(getAllMovies());
+
+  for (let m of movieList.movies) {
+    createEntry(m);
+  }
+});
+
+const addBtn = document.querySelector('.add-btn');
+addBtn.addEventListener('click', () => {
+  toggleModal(document.querySelector('.add-modal'));
+});
+
+
