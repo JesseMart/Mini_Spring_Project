@@ -1,10 +1,16 @@
 const URL = 'http://localhost:8080/movie';
 
-const getGenre = (genre) => {
+// To access the return values of these functions:
+
+// i.e    getAllMovies().then((res) => console.log(res));
+// OR
+// await Promise.resolve(getAllMovies())
+
+const getGenre = async (genre) => {
   let movies = null;
   let error = null;
 
-  axios
+  await axios
     .get(`${URL}/getGenre/${genre}`)
     .then((res) => {
       movies = res.data;
@@ -17,11 +23,11 @@ const getGenre = (genre) => {
 };
 
 // GET ALL MOVIES
-const getAllMovies = () => {
+const getAllMovies = async () => {
   let movies = null;
   let error = null;
 
-  axios
+  await axios
     .get(`${URL}/getAllMovies`)
     .then((res) => {
       movies = res.data;
@@ -36,11 +42,11 @@ const getAllMovies = () => {
 };
 
 // GET MOVIE BY ID
-const getMovieByID = (movieID) => {
+const getMovieByID = async (movieID) => {
   let movie = null;
   let error = null;
 
-  axios
+  await axios
     .get(`${URL}/getOne/${movieID}`)
     .then((res) => {
       movie = res.data;
@@ -53,7 +59,7 @@ const getMovieByID = (movieID) => {
 };
 
 // CREATE A MOVIE
-const createMovie = (movieData) => {
+const createMovie = async (movieData) => {
   // movieData is an object
   // {
   //     title: "string",
@@ -64,7 +70,7 @@ const createMovie = (movieData) => {
   let createdMovie = null;
   let error = null;
 
-  axios
+  await axios
     .post(`${URL}/createMovie`, movieData)
     .then((res) => {
       createdMovie = res.data;
@@ -77,7 +83,7 @@ const createMovie = (movieData) => {
 };
 
 // UPDATE MOVIE - PUT
-const updateMovie = (movieData) => {
+const updateMovie = async (movieData) => {
   // MOVIEDATA for this request should have an ID field
 
   const { id } = movieData;
@@ -85,7 +91,7 @@ const updateMovie = (movieData) => {
   let updatedMovie = null;
   let error = null;
 
-  axios
+  await axios
     .put(`${URL}/update/${id}`, movieData)
     .then((res) => {
       updatedMovie = res.data;
@@ -104,7 +110,7 @@ const updateMovie = (movieData) => {
 // {
 //     title: "new title"
 // }
-const updateMovieDetails = (fields, movieID) => {
+const updateMovieDetails = async (fields, movieID) => {
   const fieldsToArray = Array.from(fields);
   let queryParam = '';
 
@@ -118,7 +124,7 @@ const updateMovieDetails = (fields, movieID) => {
 
   let error = err;
 
-  axios
+  await axios
     .patch(`${URL}/update/${movieID}?${queryParam}`)
     .then((res) => {
       console.log(res); // this returns null in API
@@ -131,10 +137,10 @@ const updateMovieDetails = (fields, movieID) => {
 };
 
 // DELETE a movie
-const deleteMovie = (movieID) => {
+const deleteMovie = async (movieID) => {
   let error = null;
 
-  axios
+  await axios
     .delete(`${URL}/delete/${movieID}`)
     .then((res) => {
       console.log(res); // no content
