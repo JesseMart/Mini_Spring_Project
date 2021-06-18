@@ -146,7 +146,7 @@ const deleteMovie = async (movieID) => {
       console.log(res); // no content
     })
     .catch((err) => {
-      console.log(res);
+      console.log(err);
     });
 
   return { error };
@@ -201,6 +201,17 @@ const createEntry = (movieObj) => {
     yearInput.value = movieObj.yearRelease;
 
     document.querySelector('.edit-modal').classList.remove('hide');
+  });
+
+  deleteLink.addEventListener('click', async () => {
+    await deleteMovie(movieObj.id);
+
+    document.querySelector('.table-body').innerHTML = null;
+    const movieList = await Promise.resolve(getAllMovies());
+
+    for (let m of movieList.movies) {
+      createEntry(m);
+    }
   });
 
   tableRow.appendChild(checkboxTD);

@@ -71,7 +71,7 @@ public class MovieController {
 	//============================ DELETE =================================
 	@DeleteMapping("/delete/{index}") 
 	public ResponseEntity<Movie> deleteMovie(@PathVariable Long index) {
-		return this.service.removeMovie(index) ? new ResponseEntity<>(HttpStatus.NO_CONTENT) :
+		return this.service.removeMovie(index) ? new ResponseEntity<>(HttpStatus.OK) :
 			new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	//=========================== custom Query ===========================

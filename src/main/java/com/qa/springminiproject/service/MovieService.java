@@ -45,7 +45,7 @@ public class MovieService {
 	//=========================================== DELETE ============================================
 	public boolean removeMovie(Long id) {
 		this.repo.deleteById(id);
-		return this.repo.existsById(id);
+		return !this.repo.existsById(id);
 	}
 	// ========================================== Custom Query ======================================
 	public List<Movie> getByGenre(String genre) {
